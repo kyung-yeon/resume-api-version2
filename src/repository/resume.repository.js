@@ -1,9 +1,8 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const { dataSource } = require('../typeorm');
 
 class ResumeRepository {
     selectAllSortedResumes = async (sort) => {
-        const resumes = await prisma.resume.findMany({
+        const resumes = await dataSource.getRepository('Resume').find({
             select: {
                 resumeId: true,
                 title: true,
@@ -16,18 +15,16 @@ class ResumeRepository {
                 },
                 createdAt: true,
             },
-            orderBy: [
-                {
-                    [sort.orderKey]: sort.orderValue,
-                }
-            ]
+            order: {
+                [sort.orderKey]: sort.orderValue,
+            }
         })
 
         return resumes;
     }
 
     selectOneResumeByResumeId = async (resumeId) => {
-        const resume = await prisma.resume.findFirst({
+        const resume = await dataSource.getRepository('Resume').findOne({
             where: {
                 resumeId: +resumeId,
             },
@@ -36,38 +33,32 @@ class ResumeRepository {
                 title: true,
                 content: true,
                 status: true,
+                userId: true,
                 user: {
                     select: {
                         name: true,
                     }
                 },
                 createdAt: true,
-            },
+            }
         })
 
         return resume;
     }
 
     createResume = async (data) => {
-        await prisma.resume.create({
-            data,
-        })
+        await dataSource.getRepository('Resume').insert(data)
     }
 
     updateResumeByResumeId = async (resumeId, data) => {
-        await prisma.resume.update({
-            where: {
-                resumeId: +resumeId,
-            },
-            data,
-        })
+        await dataSource.getRepository('Resume').update({
+            resumeId: +resumeId,
+        }, data)
     }
 
     deleteResumeByResumeId = async (resumeId) => {
-        await prisma.resume.delete({
-            where: {
-                resumeId: +resumeId,
-            },
+        await dataSource.getRepository('Resume').delete({
+            resumeId: +resumeId,
         })
     }
 }

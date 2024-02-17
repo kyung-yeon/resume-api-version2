@@ -1,6 +1,4 @@
-const jwtwebToken = require('jsonwebtoken');
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const authService = require('../src/service/auth.service');
 
 const jwtValidate = async (req, res, next) => {
     try {
@@ -22,22 +20,7 @@ const jwtValidate = async (req, res, next) => {
         }
 
         // 12h 의 유효기간이 남아있는가?
-        const token = jwtwebToken.verify(tokenValue, 'resume@#');
-
-        // accessToken 안에 userId 데이터가 잘 들어있는가?
-        if (!token.userId) {
-            throw new Error('인증 정보가 올바르지 않습니다.');
-        }
-
-        const user = await prisma.user.findFirst({
-            where: {
-                userId: token.userId,
-            }
-        })
-
-        if (!user) {
-            throw new Error('인증 정보가 올바르지 않습니다.');
-        }
+        const user = await authService.verifyAccessToken(tokenValue);
 
         // user 정보 담기
         res.locals.user = user;

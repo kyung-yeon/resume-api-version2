@@ -2,10 +2,14 @@ const authService = require("../service/auth.service");
 
 class AuthController {
     generateNewAccessTokenByFreshToken = async (req, res) => {
-        const { refreshToken } = req.body;
+        try {
+            const { refreshToken } = req.body;
 
-        const token = await authService.verifyFreshToken(refreshToken);
-        return res.json(token);
+            const token = await authService.verifyFreshToken(refreshToken);
+            return res.json(token);
+        } catch (err) {
+            return res.status(err.code).json(err)
+        }
     }
 }
 
