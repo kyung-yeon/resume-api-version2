@@ -2,6 +2,18 @@ const { dataSource } = require('../typeorm');
 
 class ResumeRepository {
     selectAllSortedResumes = async (sort) => {
+
+        // 0~5
+        const randumNumber = Math.floor(Math.random() * 6);
+        console.log('randumNumber', randumNumber);
+
+        // delay
+        await new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, randumNumber * 1000) // ms
+        })
+
         const resumes = await dataSource.getRepository('Resume').find({
             select: {
                 resumeId: true,

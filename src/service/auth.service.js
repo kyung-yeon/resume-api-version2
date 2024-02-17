@@ -1,5 +1,7 @@
 const jwtwebToken = require('jsonwebtoken');
 const userRepository = require('../repository/user.repository');
+const { GLOBAL_REFRESH_TOKEN } = require('../../refresh-token');
+const { redisCache } = require('../redis/index');
 
 class AuthService {
     verifyAccessToken = async (accessToken) => {
@@ -22,6 +24,16 @@ class AuthService {
     verifyFreshToken = async (refreshToken) => {
         const token = jwtwebToken.verify(refreshToken, 'resume&%*');
         if (!token.userId) {
+            throw {
+                code: 401,
+                message: '토큰 정보가 올바르지 않습니다.'
+            }
+        }
+
+        const redis = await redisCache.get(`REFRESH_TOKEN:${token.userId}`);
+        console.log('redis', redis);
+
+        if (!redis || redis !== refreshToken) {
             throw {
                 code: 401,
                 message: '토큰 정보가 올바르지 않습니다.'

@@ -1,6 +1,8 @@
 const jwtwebToken = require('jsonwebtoken');
 const sha256 = require('crypto-js/sha256');
 const userRepository = require("../repository/user.repository");
+const { GLOBAL_REFRESH_TOKEN } = require('../../refresh-token');
+const { redisCache } = require('../redis/index');
 
 class UserService {
     userSignUp = async (data) => {
@@ -86,6 +88,10 @@ class UserService {
         // 로그인 성공
         const accessToken = jwtwebToken.sign({ userId: user.userId }, 'resume@#', { expiresIn: '12h' })
         const refreshToken = jwtwebToken.sign({ userId: user.userId }, 'resume&%*', { expiresIn: '7d' });
+
+        await redisCache.set(`REFRESH_TOKEN:${user.userId}`, refreshToken);
+        // GLOBAL_REFRESH_TOKEN[user.userId] = refreshToken;
+
         return {
             accessToken,
             refreshToken,

@@ -2,6 +2,7 @@ const resumeService = require('../service/resume.service');
 
 class ResumeContoller {
     findAllResumes = async (req, res) => {
+        console.log('resume 전체 조회!');
         try {
             const orderKey = req.query.orderKey ?? 'resumeId';
             const orderValue = req.query.orderValue ?? 'desc';

@@ -7,11 +7,12 @@ const swaggerUi = require('swagger-ui-express')
 const authRouter = require('./routers/auth.router');
 const userRouter = require('./routers/user.router');
 const resumeRouter = require('./routers/resume.router');
+const { apiTimeCheck } = require('./middleware/api-time-check');
 
 const app = express()
 const port = 3000
 
-
+app.use(apiTimeCheck);
 app.use(bodyParser.json());
 
 app.use('/auth', authRouter);
