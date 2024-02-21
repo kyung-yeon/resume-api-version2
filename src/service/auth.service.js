@@ -1,7 +1,6 @@
 const jwtwebToken = require('jsonwebtoken');
 const userRepository = require('../repository/user.repository');
-const { GLOBAL_REFRESH_TOKEN } = require('../../refresh-token');
-const { redisCache } = require('../redis/index');
+const { redisCache } = require('../redis');
 
 class AuthService {
     verifyAccessToken = async (accessToken) => {

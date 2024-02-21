@@ -2,7 +2,7 @@ const jwtwebToken = require('jsonwebtoken');
 const sha256 = require('crypto-js/sha256');
 const userRepository = require("../repository/user.repository");
 const { GLOBAL_REFRESH_TOKEN } = require('../../refresh-token');
-const { redisCache } = require('../redis/index');
+const { redisCache } = require('../redis');
 
 class UserService {
     userSignUp = async (data) => {
