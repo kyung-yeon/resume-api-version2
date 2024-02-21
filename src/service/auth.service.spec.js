@@ -5,7 +5,7 @@ const { redisCache } = require('../redis');
 
 jest.mock('jsonwebtoken');
 jest.mock('../repository/user.repository');
-jest.mock('../redis/index');
+jest.mock('../redis');
 
 describe('AuthService', () => {
     describe('AccessToken 인증', () => {
@@ -53,7 +53,7 @@ describe('AuthService', () => {
             jwtwebToken.verify.mockReturnValue({
                 userId: 1,
             })
-            redisCache.get.mockResolvedValueOnce(refreshToken);
+            redisCache.get = jest.fn(() => refreshToken)
             userRepository.findOneUserByUserId.mockResolvedValueOnce({
                 userId: 1,
                 name: '홍길동'

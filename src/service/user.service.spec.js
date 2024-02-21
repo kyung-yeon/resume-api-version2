@@ -1,9 +1,11 @@
 const userService = require('./user.service');
 const jwtwebToken = require('jsonwebtoken');
 const userRepository = require("../repository/user.repository");
+const { redisCache } = require('../redis')
 
 jest.mock('jsonwebtoken')
 jest.mock('../repository/user.repository')
+jest.mock('../redis')
 
 describe('UserService', () => {
     describe('사용자 가입', () => {
@@ -75,6 +77,8 @@ describe('UserService', () => {
             jwtwebToken.sign.mockReturnValueOnce('newAccessToken')
                 .mockReturnValueOnce('newRefreshToken')
 
+            redisCache.set = jest.fn();
+
             const result = await userService.userSignIn({
                 clientId: 'c1',
             })
@@ -92,6 +96,8 @@ describe('UserService', () => {
             jwtwebToken.sign.mockReturnValueOnce('newAccessToken')
                 .mockReturnValueOnce('newRefreshToken')
 
+            redisCache.set = jest.fn();
+
             const result = await userService.userSignIn({
                 email: 'a@b.com',
                 password: 'aa',
@@ -104,6 +110,8 @@ describe('UserService', () => {
 
         it('email, password 가 올바르지 않으면 로그인이 되지 않는다.', async () => {
             userRepository.selectOneUserbyEmailAndPassword.mockResolvedValueOnce(undefined)
+
+            redisCache.set = jest.fn();
 
             await expect(userService.userSignIn({
                 email: 'a@b.com',
