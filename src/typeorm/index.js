@@ -1,7 +1,9 @@
-require('dotenv').config()
-const typeorm = require("typeorm")
+import 'dotenv/config';
+import { DataSource } from "typeorm";
+import UserEntity from './entity/user.entity.js';
+import ResumeEntity from './entity/resume.entity.js';
 
-const dataSource = new typeorm.DataSource({
+export const dataSource = new DataSource({
     type: "mysql",
     host: process.env.HOST,
     port: process.env.POST,
@@ -10,15 +12,11 @@ const dataSource = new typeorm.DataSource({
     database: process.env.DATABASE,
     synchronize: false,
     entities: [
-        require("./entity/user.entity"),
-        require("./entity/resume.entity")
+        UserEntity,
+        ResumeEntity
     ],
 })
 
 if (process.env.NODE_ENV !== 'test') {
     dataSource.initialize();
-}
-
-module.exports = {
-    dataSource,
 }

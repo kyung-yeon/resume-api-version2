@@ -1,5 +1,5 @@
-const userContoller = require('./user.controller');
-const userService = require('../service/user.service');
+import userContoller from './user.controller.js';
+import userService from '../service/user.service.js';
 
 jest.mock('../service/user.service');
 

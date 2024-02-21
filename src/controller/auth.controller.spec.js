@@ -1,5 +1,5 @@
-const authController = require('./auth.controller');
-const authService = require("../service/auth.service");
+import authController from './auth.controller.js'
+import authService from "../service/auth.service.js"
 
 jest.mock('../service/auth.service');
 

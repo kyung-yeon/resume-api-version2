@@ -1,6 +1,6 @@
-const EntitySchema = require("typeorm").EntitySchema
+import { EntitySchema } from "typeorm";
 
-module.exports = new EntitySchema({
+export default new EntitySchema({
     name: "Resume",
     tableName: "resume",
     columns: {

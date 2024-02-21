@@ -1,5 +1,5 @@
-const resumeService = require('./resume.service');
-const resumeRepository = require('../repository/resume.repository');
+import resumeService from './resume.service.js';
+import resumeRepository from '../repository/resume.repository.js';
 
 jest.mock('../repository/resume.repository')
 

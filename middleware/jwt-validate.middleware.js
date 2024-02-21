@@ -1,4 +1,4 @@
-const authService = require('../src/service/auth.service');
+import authService from '../src/service/auth.service.js';
 
 const jwtValidate = async (req, res, next) => {
     try {
@@ -34,4 +34,4 @@ const jwtValidate = async (req, res, next) => {
     }
 }
 
-module.exports = jwtValidate
+export default jwtValidate

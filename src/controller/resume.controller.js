@@ -1,4 +1,4 @@
-const resumeService = require('../service/resume.service');
+import resumeService from '../service/resume.service.js';
 
 class ResumeContoller {
     findAllResumes = async (req, res) => {
@@ -156,4 +156,4 @@ class ResumeContoller {
 }
 
 const resumeContoller = new ResumeContoller();
-module.exports = resumeContoller;
+export default resumeContoller;

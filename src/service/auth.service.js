@@ -1,6 +1,6 @@
-const jwtwebToken = require('jsonwebtoken');
-const userRepository = require('../repository/user.repository');
-const { redisCache } = require('../redis');
+import jwtwebToken from 'jsonwebtoken';
+import userRepository from '../repository/user.repository.js';
+import { redisCache } from '../redis/index.js';
 
 class AuthService {
     verifyAccessToken = async (accessToken) => {
@@ -59,4 +59,4 @@ class AuthService {
 }
 
 const authService = new AuthService();
-module.exports = authService
+export default authService

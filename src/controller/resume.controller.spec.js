@@ -1,5 +1,5 @@
-const resumeContoller = require('./resume.controller');
-const resumeService = require('../service/resume.service');
+import resumeContoller from './resume.controller.js';
+import resumeService from '../service/resume.service.js';
 
 jest.mock('../service/resume.service');
 

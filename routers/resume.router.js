@@ -1,6 +1,6 @@
-const express = require('express');
-const jwtValidate = require('../middleware/jwt-validate.middleware');
-const resumeController = require('../src/controller/resume.controller');
+import express from 'express';
+import jwtValidate from '../middleware/jwt-validate.middleware.js';
+import resumeController from '../src/controller/resume.controller.js';
 const router = express.Router();
 
 router.get('/', resumeController.findAllResumes)
@@ -13,4 +13,4 @@ router.patch('/:resumeId', jwtValidate, resumeController.updateResume)
 
 router.delete('/:resumeId', jwtValidate, resumeController.deleteResume)
 
-module.exports = router;
+export default router;

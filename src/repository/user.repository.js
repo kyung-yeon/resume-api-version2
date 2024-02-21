@@ -1,4 +1,4 @@
-const { dataSource } = require('../typeorm');
+import { dataSource } from '../typeorm/index.js';
 
 class UserRepository {
     findOneUserByUserId = async (userId) => {
@@ -49,4 +49,4 @@ class UserRepository {
 }
 
 const userRepository = new UserRepository();
-module.exports = userRepository;
+export default userRepository;

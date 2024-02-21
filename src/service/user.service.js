@@ -1,8 +1,7 @@
-const jwtwebToken = require('jsonwebtoken');
-const sha256 = require('crypto-js/sha256');
-const userRepository = require("../repository/user.repository");
-const { GLOBAL_REFRESH_TOKEN } = require('../../refresh-token');
-const { redisCache } = require('../redis');
+import jwtwebToken from 'jsonwebtoken';
+import sha256 from 'crypto-js/sha256.js';
+import userRepository from "../repository/user.repository.js";
+import { redisCache } from '../redis/index.js';
 
 class UserService {
     userSignUp = async (data) => {
@@ -100,4 +99,4 @@ class UserService {
 }
 
 const userService = new UserService();
-module.exports = userService;
+export default userService;

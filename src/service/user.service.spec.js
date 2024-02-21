@@ -1,11 +1,11 @@
-const userService = require('./user.service');
-const jwtwebToken = require('jsonwebtoken');
-const userRepository = require("../repository/user.repository");
-const { redisCache } = require('../redis')
+import userService from './user.service.js';
+import jwtwebToken from 'jsonwebtoken';
+import userRepository from "../repository/user.repository.js";
+import { redisCache } from '../redis/index.js'
 
 jest.mock('jsonwebtoken')
 jest.mock('../repository/user.repository')
-jest.mock('../redis')
+jest.mock('../redis/index')
 
 describe('UserService', () => {
     describe('사용자 가입', () => {

@@ -1,6 +1,6 @@
-const axios = require('axios');
+import axios from 'axios';
 
-const apiTimeCheck = (req, res, next) => {
+export const apiTimeCheck = (req, res, next) => {
     const start = new Date()
     next();
     res.on('finish', () => {
@@ -16,8 +16,4 @@ const apiTimeCheck = (req, res, next) => {
             })
         }
     })
-}
-
-module.exports = {
-    apiTimeCheck,
 }

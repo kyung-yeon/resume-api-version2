@@ -1,6 +1,6 @@
-const express = require('express');
-const jwtValidate = require('../middleware/jwt-validate.middleware');
-const userController = require('../src/controller/user.controller');
+import express from 'express';
+import jwtValidate from '../middleware/jwt-validate.middleware.js';
+import userController from '../src/controller/user.controller.js';
 
 const router = express.Router();
 
@@ -86,4 +86,4 @@ router.post('/sign-in', userController.userSignIn)
 
 router.get('/me', jwtValidate, userController.getMyInfo)
 
-module.exports = router;
+export default router;

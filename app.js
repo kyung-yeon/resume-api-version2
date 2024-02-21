@@ -1,13 +1,13 @@
-const express = require('express')
-const bodyParser = require('body-parser');
+import express from 'express'
+import bodyParser from 'body-parser';
 
-const swaggerJsdoc = require('swagger-jsdoc')
-const swaggerUi = require('swagger-ui-express')
+import swaggerJsdoc from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
 
-const authRouter = require('./routers/auth.router');
-const userRouter = require('./routers/user.router');
-const resumeRouter = require('./routers/resume.router');
-const { apiTimeCheck } = require('./middleware/api-time-check');
+import authRouter from './routers/auth.router.js';
+import userRouter from './routers/user.router.js';
+import resumeRouter from './routers/resume.router.js';
+import { apiTimeCheck } from './middleware/api-time-check.js';
 
 const app = express()
 const port = 3000

@@ -1,4 +1,4 @@
-const resumeRepository = require("../repository/resume.repository");
+import resumeRepository from "../repository/resume.repository.js";
 
 class ResumeService {
     findAllSortedResumes = async (sort) => {
@@ -64,4 +64,4 @@ class ResumeService {
 }
 
 const resumeService = new ResumeService();
-module.exports = resumeService;
+export default resumeService;

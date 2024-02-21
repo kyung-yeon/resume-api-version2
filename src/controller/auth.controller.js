@@ -1,4 +1,4 @@
-const authService = require("../service/auth.service");
+import authService from "../service/auth.service.js";
 
 class AuthController {
     generateNewAccessTokenByFreshToken = async (req, res) => {
@@ -14,4 +14,4 @@ class AuthController {
 }
 
 const authController = new AuthController();
-module.exports = authController;
+export default authController;
