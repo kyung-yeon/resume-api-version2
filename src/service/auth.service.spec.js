@@ -1,9 +1,11 @@
 const authService = require('../service/auth.service');
 const jwtwebToken = require('jsonwebtoken');
 const userRepository = require('../repository/user.repository');
+const { redisCache } = require('../redis');
 
 jest.mock('jsonwebtoken');
 jest.mock('../repository/user.repository');
+jest.mock('../redis/index');
 
 describe('AuthService', () => {
     describe('AccessToken 인증', () => {
@@ -47,9 +49,11 @@ describe('AuthService', () => {
 
     describe('RefreshToken 인증', () => {
         it('RefreshToken 정상 인증', async () => {
+            const refreshToken = 'token';
             jwtwebToken.verify.mockReturnValue({
                 userId: 1,
             })
+            redisCache.get.mockResolvedValueOnce(refreshToken);
             userRepository.findOneUserByUserId.mockResolvedValueOnce({
                 userId: 1,
                 name: '홍길동'
@@ -59,7 +63,6 @@ describe('AuthService', () => {
                 .mockReturnValueOnce('newRefreshToken');
 
 
-            const refreshToken = 'token';
             const result = await authService.verifyFreshToken(refreshToken);
             expect(result).toBeDefined();
             expect(result).toMatchObject({

@@ -31,7 +31,6 @@ class AuthService {
         }
 
         const redis = await redisCache.get(`REFRESH_TOKEN:${token.userId}`);
-        console.log('redis', redis);
 
         if (!redis || redis !== refreshToken) {
             throw {
