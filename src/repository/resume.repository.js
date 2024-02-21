@@ -4,7 +4,7 @@ class ResumeRepository {
     selectAllSortedResumes = async (sort) => {
 
         // 0~5
-        const randumNumber = Math.floor(Math.random() * 6);
+        const randumNumber = Math.floor(Math.random() * 2);
         console.log('randumNumber', randumNumber);
 
         // delay
