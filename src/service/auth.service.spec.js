@@ -1,11 +1,11 @@
-const authService = require('../service/auth.service');
-const jwtwebToken = require('jsonwebtoken');
-const userRepository = require('../repository/user.repository');
-const { redisCache } = require('../redis');
+import authService from '../service/auth.service.js';
+import jwtwebToken from 'jsonwebtoken';
+import userRepository from '../repository/user.repository.js';
+import { redisCache } from '../redis/index.js';
 
 jest.mock('jsonwebtoken');
 jest.mock('../repository/user.repository');
-jest.mock('../redis');
+jest.mock('../redis/index');
 
 describe('AuthService', () => {
     describe('AccessToken 인증', () => {
@@ -61,7 +61,6 @@ describe('AuthService', () => {
             jwtwebToken.sign
                 .mockReturnValueOnce('newAccessToken')
                 .mockReturnValueOnce('newRefreshToken');
-
 
             const result = await authService.verifyFreshToken(refreshToken);
             expect(result).toBeDefined();

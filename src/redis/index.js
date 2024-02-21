@@ -1,7 +1,7 @@
-require('dotenv').config()
-const { Cache } = require('cache-store-manager');
+import 'dotenv/config';
+import { Cache } from 'cache-store-manager';
 
-let redisCache ;
+export let redisCache ;
 
 if (process.env.NODE_ENV === 'test') {
     redisCache = {};
@@ -12,8 +12,4 @@ if (process.env.NODE_ENV === 'test') {
         db: '0',
         ttl: 60 * 1000 // milliseconds
     });
-}
-
-module.exports = {
-    redisCache,
 }

@@ -1,5 +1,1 @@
-const GLOBAL_REFRESH_TOKEN = {};
-
-module.exports = {
-    GLOBAL_REFRESH_TOKEN,
-}
+export const GLOBAL_REFRESH_TOKEN = {};

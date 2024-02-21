@@ -1,5 +1,5 @@
-const { dataSource } = require('../typeorm');
-const resumeRepository = require('./resume.repository');
+import { dataSource } from '../typeorm/index.js';
+import resumeRepository from './resume.repository.js';
 
 jest.mock('../typeorm')
 

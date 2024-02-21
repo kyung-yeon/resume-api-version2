@@ -1,4 +1,4 @@
-const { dataSource } = require('../typeorm');
+import { dataSource } from '../typeorm/index.js';
 
 class ResumeRepository {
     selectAllSortedResumes = async (sort) => {
@@ -76,4 +76,4 @@ class ResumeRepository {
 }
 
 const resumeRepository = new ResumeRepository();
-module.exports = resumeRepository;
+export default resumeRepository;
